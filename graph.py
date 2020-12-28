@@ -85,7 +85,42 @@ class Graph:
             return
 
         # execute dikstra method
-        print("success")
+        self.__dikjstra(start_node)
+
+        output_node = [end_node.getId()]
+
+        # while end_node.getId() != start_node_id:
+        #     end_node = end_node.getPrevNode()
+        #     if end_node == None:
+        #         break
+        #     output_node.append(end_node)
+
+        # #if last element of otput_node is not the start node id, display error, other wise, display the result
+        # if output_node[len(output_node)-1].getId() is start_node_id:
+        #     print("\nStart vertex: "+ start_node_id)
+        #     print("Destination vertex: "+ end_node_id)
+        #     print("Shortest distance: "+ str(output_node[0].getShortestDist()))
+
+        #     print("Path: "+output_node.pop(len(output_node)-1).getId(),end="")
+        #     for i in reversed(range(len(output_node))):
+        #         print(" -> "+output_node[i].getId(),end="")
+        #     print("")
+        #     self.__display_table(start_node_id)
+        # else:
+        #     print("Error. No path between vertex "+start_node_id+" and vertex "+end_node_id)
+
+        # print(output_nodes[0])
+        while end_node.getId() != start_node.getId():
+            end_node = end_node.getPrevNode()
+            output_node.insert(0,end_node.getId())
+
+        print("Shortest Distance : ")
+        for node in output_node:
+            if node == end_node_id:
+                print(node, end="")
+                return 
+
+            print(node+' -> ', end="")
 
     def __dikjstra(self, start_node):
         visited = []
@@ -135,7 +170,3 @@ class Graph:
                         current_node = v
                     else:
                         current_node = None
-
-
-
-        
