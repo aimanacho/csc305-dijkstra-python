@@ -89,7 +89,7 @@ class Graph:
 
         output_node = [end_node.getId()]
 
-=       while end_node.getId() != start_node.getId():
+        while end_node.getId() != start_node.getId():
             end_node = end_node.getPrevNode()
             output_node.insert(0,end_node.getId())
 
