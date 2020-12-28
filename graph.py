@@ -1,4 +1,5 @@
 from node import Node
+from math import inf
 
 class Graph:
 
@@ -63,11 +64,78 @@ class Graph:
         for x in self.__node:
             print(x)
 
+    def __display_table(self, start_node):
+        pass
+
+    def shortest_path(self, start_node_id, end_node_id):
+        # validate whether both node id exist 
+        start_node = None
+        end_node = None
         
+        # for loop to convert id to obj --> can be used for passing param in dikstra method
+        for x in self.__node:
+            if x.getId() == start_node_id:
+                start_node = x
+            if x.getId() == end_node_id:
+                end_node = x
+                
+        #validate if the id exists
+        if start_node == None or end_node == None:
+            print("The ID does not exist")
+            return
+
+        # execute dikstra method
+        print("success")
+
+    def __dikjstra(self, start_node):
+        visited = []
+        unvisited = [x for x in self.__node]
+        shortest_dist_from_start_node = 0
+        current_node = start_node
+
+        current_node.setShortestDist(shortest_dist_from_start_node)
+
+        while current_node:
+            #check unvisited neighbor
+            for neighbor_node, distance in current_node.getNeighbors().items():
+                #print(neighbor_node.getId(), distance) troubleshoot je ni
+                if neighbor_node in visited:
+                    continue
+
+                #add up shortest_dist_from_start_node with distance from neighbor distance
+                calc_dist = shortest_dist_from_start_node +  distance
+
+                if calc_dist < neighbor_node.getShortestDist():
+                    neighbor_node.setShortestDist(calc_dist)
+                    neighbor_node.setPrevNode(current_node)
+
+            # add current node to visited array
+            visited.append(current_node)
             
-        
+            #update next node and next shortest distance
+            next_shortest_dist_from_start_node = inf
+            next_node = None
+
+            for unvisited_node in unvisited:
+                if unvisited_node in visited:
+                    continue
+
+                if unvisited_node.getShortestDist() < next_shortest_dist_from_start_node:
+                    next_shortest_dist_from_start_node = unvisited_node.getShortestDist()
+                    next_node = unvisited_node
+
+            # update current node and shortest distance from start vertex
+            if next_node:
+                # finalised
+                current_node = next_node
+                shortest_dist_from_start_node = next_shortest_dist_from_start_node
+            else: #if there are left over unvisited node
+                for v in unvisited:
+                    if v not in visited:
+                        current_node = v
+                    else:
+                        current_node = None
 
 
 
-        
         
