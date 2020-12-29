@@ -18,8 +18,8 @@ Method:
 
 - // add_unidirectional_edges(string node1, string node2, int distance)
 - // add_bidirectional_edges(string node1, string node2, int distance)
-- dijkstra( string startingNode )
-- shortest_path( string startingNode, string destinationNode )
+- // dijkstra( string startingNode )
+- // shortest_path( string startingNode, string destinationNode )
 - display_table( string originNode )
 
 
