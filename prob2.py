@@ -7,3 +7,5 @@ g.add_unidirectional_edges('b','a',4)
 g.add_unidirectional_edges('c','b',1)
 g.add_unidirectional_edges('d','b',2)
 g.add_unidirectional_edges('d','c',6)
+
+g.shortest_path('a', 'e')

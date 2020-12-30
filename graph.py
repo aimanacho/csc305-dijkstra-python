@@ -120,11 +120,18 @@ class Graph:
 
         while end_node.getId() != start_node.getId():
             end_node = end_node.getPrevNode()
+            if end_node == None:
+                break
             output_node.insert(0,end_node.getId())
 
+        #if first element of otput_node is not the start node id, display error, other wise, display the 
+        if output_node[0] is not start_node_id:
+            print("Error. No path between vertex "+start_node_id+" and vertex "+end_node_id)
+            return 
+        
+        # shortest path    
         print("Shortest Path: ")
-
-        # shortest path
+        
         for node in output_node:
             if node == end_node_id:
                 print(node, end="")
@@ -134,7 +141,6 @@ class Graph:
         
         # shortest distance
         print ('\nShortest distance to '+ temp_end_node.getId() + ' = ' + str(temp_end_node.getShortestDist()) )
-
 
         #display table
         self.__display_table(start_node)
