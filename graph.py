@@ -2,12 +2,22 @@ from node import Node
 from math import inf
 
 class Graph:
-
+    """
+    class Graph:
+        attribute:
+            __node: list
+    """
     def __init__(self):
         self.__node = []
 
-    #node1 = origin, node2 = destination
-    def add_unidirectional_edges(self, from_node_id, to_node_id, distance):
+    def __create_node(self, from_node_id, to_node_id):
+        """
+            Create nodes if the specified are not existed.
+            
+            @param from_node_id: specify the id of the starting node\n
+            @param to_node_id: specify the id of the destination node\n
+            @return from_node: Node, to_node: Node
+        """
         #ensure from_node_id and start_node_id is not the same
         if from_node_id == to_node_id:
             print("Cannot insert same node")
@@ -32,37 +42,37 @@ class Graph:
             n2 = Node(to_node_id)
             self.__node.append(n2)
 
+        #return from_node and to_node
+        return n1, n2        
+
+    
+    #node1 = origin, node2 = destination
+    def add_unidirectional_edges(self, from_node_id, to_node_id, distance):
+        """
+            Adds a unidirectional edge between two nodes
+
+            @param from_node_id: specify the id of the starting node\n
+            @param to_node_id: specify the id of the destination node\n
+            @return void
+        """
+        n1, n2 = self.__create_node(from_node_id, to_node_id)
+
         # add neighbour
-        if n1 in n2.getNeighbors() and n2 in n1.getNeighbors():
+        if n1 in n2.getNeighbors():
             print("Is already neighbours")
         else:
             n1.setNeighbor(n2,distance) # n1 ----> n2
 
-
     
     def add_bidirectional_edges( self, node1, node2, distance):
-        #ensure from_node_id and start_node_id is not the same
-        if node1 == node2:
-            print("Cannot insert same node")
-            return
+        """
+            Adds a bidirectional edge between two nodes.
 
-        #declaration of n1 and n2
-        n1 = n2 = None
-
-        #check if node1,node 2 exist , then assign the object to n1/n2
-        for x in self.__node:
-            if x.getId()== node1:
-                n1 = x
-            if x.getId()== node2:
-                n2 = x
-        
-        #If node1 and node2 not exist, then create a new node to assign to n1/n2
-        if n1 is None:
-           n1 = Node(node1) 
-           self.__node.append(n1)
-        if n2 is None:
-            n2 = Node(node2)
-            self.__node.append(n2)
+            @param from_node_id: specify the id of the starting node\n
+            @param to_node_id: specify the id of the destination node\n
+            @return void
+        """
+        n1, n2 = self.__create_node(node1, node2)
 
         #Set neighbour between edges
         #Check if 2 edges oredi a neihbor exist
@@ -72,11 +82,26 @@ class Graph:
             n1.setNeighbor(n2,distance) # n1 ----> n2
             n2.setNeighbor(n1,distance) # n2 ----> n1
 
+    
     def displayNode(self):
+        """
+            Display all nodes associated to this graph.
+
+            @param none\n
+            @return void
+        """
         for x in self.__node:
             print(x)
 
+
     def __display_table(self, start_node):
+        """
+            Display the table of the Dijkstra's shortest path
+
+            @param start_node: Specify the starting node of Node object\n
+            @return void  
+        """
+
         print("\n\n------------------------------------Table------------------------------------------")
         print("Vertex\t\t|\tShortest Dist from vertex "+start_node.getId()+"\t|\tPrevious vertex")
         
@@ -85,17 +110,15 @@ class Graph:
             prev_node_id = node.getPrevNode().getId() if node.getPrevNode() != None else '-'
             print( node.getId()+"\t\t|\t\t\t"+str(node.getShortestDist())+"\t\t|\t\t"+ prev_node_id)
 
-        # print("\nTable of Dijsktra's Shortest Path Algorithm")
-        # print("-------------------------------------------\n")
-        # print("vertex\t|\tshortest distance from vertex '"+start_node.getId().upper()+"'\t|\tprevious vertex")
-        # print("-----------------------------------------------------------------------------------")
-
-        
-        # for n in temp:
-        #     print(n.getId() + "\t|\t\t\t" + str(n.getShortestDist()) + "\t\t\t|\t\t" + (n.getPrevNode().getId() if n.getPrevNode() != None else "-"))
-            
 
     def shortest_path(self, start_node_id, end_node_id):
+        """
+            Returns the shortest path between two nodes.
+
+            @param start_node_id: specify the id of the starting node\n
+            @param end_node_id: specify the id of the destination node\n
+            @return void
+        """
         # validate whether both node id exist 
         start_node = None
         end_node = None
@@ -145,7 +168,14 @@ class Graph:
         #display table
         self.__display_table(start_node)
 
+
     def __dikjstra(self, start_node):
+        """
+            Process the shortest path from the start vertex using the Dijkstra's shortest path algorithm
+
+            @param start_node: Specify the starting node of Node object\n
+            @return void
+        """
         visited = []
         unvisited = [x for x in self.__node]
         shortest_dist_from_start_node = 0
