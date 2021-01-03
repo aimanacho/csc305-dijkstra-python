@@ -57,8 +57,8 @@ class Graph:
         n1, n2 = self.__create_node(from_node_id, to_node_id)
 
         # add neighbour
-        if n1 in n2.getNeighbors():
-            print("Is already neighbours")
+        if n2 in n1.getNeighbors():
+            print("Node "+n1.getId()+" is already neighbour with node "+n2.getId())
         else:
             n1.setNeighbor(n2,distance) # n1 ----> n2
 
