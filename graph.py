@@ -46,7 +46,6 @@ class Graph:
         return n1, n2        
 
     
-    #node1 = origin, node2 = destination
     def add_unidirectional_edges(self, from_node_id, to_node_id, distance):
         """
             Adds a unidirectional edge between two nodes
@@ -199,27 +198,24 @@ class Graph:
 
             # add current node to visited array
             visited.append(current_node)
+            unvisited.remove(current_node)
             
             #update next node and next shortest distance
             next_shortest_dist_from_start_node = inf
             next_node = None
 
             for unvisited_node in unvisited:
-                if unvisited_node in visited:
-                    continue
-
                 if unvisited_node.getShortestDist() < next_shortest_dist_from_start_node:
                     next_shortest_dist_from_start_node = unvisited_node.getShortestDist()
                     next_node = unvisited_node
 
             # update current node and shortest distance from start vertex
             if next_node:
-                # finalised
                 current_node = next_node
                 shortest_dist_from_start_node = next_shortest_dist_from_start_node
-            else: #if there are left over unvisited node
-                for v in unvisited:
-                    if v not in visited:
-                        current_node = v
-                    else:
-                        current_node = None
+            #if there are left over unvisited node
+            else: 
+                if unvisited:
+                    current_node = unvisited[0]
+                else:
+                    current_node = None

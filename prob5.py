@@ -11,4 +11,4 @@ g.add_unidirectional_edges('d','f',11)
 g.add_unidirectional_edges('e','d',4)
 
 
-g.shortest_path('a', 'c')
+g.shortest_path('a', 'f')
