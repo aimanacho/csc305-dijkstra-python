@@ -32,4 +32,4 @@ class Node:
         self.__prev_node = node
 
     def __str__(self):
-        return "\nNode: "+self.__id+"\nAdjacents:\n"+"\n".join(str(node.__id) + ", " + str(weight) for node, weight in self.__neighbors.items()) + "\nShortest distance: "+ str(self.__shortest_dist) + "\nPrevious node: "+ str(self.__prev_node.__id if self.__prev_node != None else "-")
+        return "\nNode: "+self.__id+"\nNeighbors:\n"+"\n".join(str(node.__id) + ", " + str(weight) for node, weight in self.__neighbors.items()) + "\nShortest distance: "+ str(self.__shortest_dist) + "\nPrevious node: "+ str(self.__prev_node.__id if self.__prev_node != None else "-")
