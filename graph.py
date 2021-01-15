@@ -54,7 +54,7 @@ class Graph:
             @param to_node_id: specify the id of the destination node\n
             @return void
         """
-        n1, n2 = self.__create_node(from_node_id.upper(), to_node_id.upper())
+        n1, n2 = self.__create_node(from_node_id.lower(), to_node_id.lower())
 
         # add neighbour
         if n2 in n1.getNeighbors():
@@ -71,7 +71,7 @@ class Graph:
             @param to_node_id: specify the id of the destination node\n
             @return void
         """
-        n1, n2 = self.__create_node(node1.upper(), node2.upper())
+        n1, n2 = self.__create_node(node1.lower(), node2.lower())
 
         #Set neighbour between edges
         #Check if 2 edges oredi a neihbor exist
@@ -118,9 +118,9 @@ class Graph:
             @param end_node_id: specify the id of the destination node\n
             @return void
         """
-        # convert to uppercase 
-        start_node_id = start_node_id.upper()
-        end_node_id = end_node_id.upper()
+        # convert to lowercase 
+        start_node_id = start_node_id.lower()
+        end_node_id = end_node_id.lower()
 
         # validate whether both node id exist 
         start_node = None
