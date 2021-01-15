@@ -54,7 +54,7 @@ class Graph:
             @param to_node_id: specify the id of the destination node\n
             @return void
         """
-        n1, n2 = self.__create_node(from_node_id, to_node_id)
+        n1, n2 = self.__create_node(from_node_id.upper(), to_node_id.upper())
 
         # add neighbour
         if n2 in n1.getNeighbors():
@@ -71,7 +71,7 @@ class Graph:
             @param to_node_id: specify the id of the destination node\n
             @return void
         """
-        n1, n2 = self.__create_node(node1, node2)
+        n1, n2 = self.__create_node(node1.upper(), node2.upper())
 
         #Set neighbour between edges
         #Check if 2 edges oredi a neihbor exist
@@ -118,6 +118,10 @@ class Graph:
             @param end_node_id: specify the id of the destination node\n
             @return void
         """
+        # convert to uppercase 
+        start_node_id = start_node_id.upper()
+        end_node_id = end_node_id.upper()
+
         # validate whether both node id exist 
         start_node = None
         end_node = None
@@ -147,7 +151,7 @@ class Graph:
             output_node.insert(0,end_node.getId())
 
         #if first element of otput_node is not the start node id, display error, other wise, display the 
-        if output_node[0] is not start_node_id:
+        if output_node[0] != start_node_id:
             print("Error. No path between vertex "+start_node_id+" and vertex "+end_node_id)
             return 
         

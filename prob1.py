@@ -11,4 +11,5 @@ g.add_unidirectional_edges('c','d',3)
 g.add_unidirectional_edges('s','a',1)
 g.add_unidirectional_edges('s','c',2)
 
-g.shortest_path('s', 'e')
+g.shortest_path('s', 'c')
+# g.displayNode()
